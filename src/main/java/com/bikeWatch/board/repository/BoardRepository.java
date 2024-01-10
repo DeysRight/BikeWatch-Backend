@@ -1,7 +1,10 @@
 package com.bikeWatch.board.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.bikeWatch.board.domain.Board;
+
 @Repository
-public interface BoardRepository {
+public interface BoardRepository extends JpaRepository<Board, Long> {
 }
