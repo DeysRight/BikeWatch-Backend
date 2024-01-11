@@ -1,7 +1,6 @@
-MAINTAINER Kyungtak Park <qkrrudxkr77@naver.com>
-
 # jar 파일 빌드
-FROM eclipse-temurin:11 as builder
+FROM openjdk:17-jdk-slim as builder
+LABEL maintainer="Kyungtak Park <qkrrudxkr77@gmail.com>"
 
 COPY gradlew .
 COPY gradle gradle
@@ -9,11 +8,12 @@ COPY build.gradle .
 COPY settings.gradle .
 COPY src src
 RUN chmod +x ./gradlew
-RUN ./gradlew bootjar
+RUN ./gradlew bootJar
 
 # jar 실행
 # 빌드를 하지 않으므로 JDK가 아닌 JRE를 베이스 이미지로 세팅
-FROM eclipse-temurin:11-jre as runtime
+FROM openjdk:17-jdk-slim as runtime
+LABEL maintainer="Kyungtak Park <qkrrudxkr77@gmail.com>"
 
 RUN addgroup --system --gid 1000 worker
 RUN adduser --system --uid 1000 --ingroup worker --disabled-password worker
