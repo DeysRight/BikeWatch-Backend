@@ -1,6 +1,6 @@
 # BikeWatch
 
-## Branch 전략(Git Flow)
+## ✅ Branch 전략(Git Flow)
 
 ![image](https://github.com/DeysRight/BikeWatch/assets/68748397/bf2d8fae-d815-4bb4-a606-74e59b363191)
 
@@ -14,6 +14,6 @@ test : 테스트 코드 포맷팅, 리팩토링 테스트 코드 추가
 ---------------------------------------------------------------------------
 ```
 
-## Java 코딩 컨벤션(네이버)
+## ✅ Java 코딩 컨벤션(네이버)
 
 https://bestinu.tistory.com/64
