@@ -17,3 +17,11 @@ test : 테스트 코드 포맷팅, 리팩토링 테스트 코드 추가
 ## ✅ Java 코딩 컨벤션(네이버)
 
 https://bestinu.tistory.com/64
+
+## ✅ 사용 기술 및 스택
+- Java 17
+- Spring Boot 3.2.1
+- JPA(Hibernate 6.4.1)
+- MariaDB 10.5
+- JUnit 5.10.1
+- GitHub Actions
