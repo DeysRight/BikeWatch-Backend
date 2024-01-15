@@ -1,5 +1,11 @@
 # BikeWatch
 
+## ✅ 바이크워치(BikeWatch) 서비스
+https://bikewatch.shop
+
+## ✅ 바이크워치(BikeWatch) API 명세서
+https://api.bikewatch.shop/swagger-ui/index.html
+
 ## ✅ Branch 전략(Git Flow)
 
 ![image](https://github.com/DeysRight/BikeWatch/assets/68748397/bf2d8fae-d815-4bb4-a606-74e59b363191)
