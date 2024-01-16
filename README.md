@@ -30,6 +30,7 @@ https://bestinu.tistory.com/64
 - Spring Boot 3.2.1
 - JPA(Hibernate 6.4.1)
 - MariaDB 10.5
+- Querydsl 5.0
 - JUnit 5.10.1
 - Gradle 8.5
 - GitHub Actions
