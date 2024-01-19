@@ -6,10 +6,11 @@ https://bikewatch.shop
 ## ✅ 바이크워치(BikeWatch) API 명세서
 https://api.bikewatch.shop/swagger-ui/index.html
 
-## ✅ Branch 전략(Git Flow)
+## ✅ Branch 전략(Github Flow)
 
-![image](https://github.com/DeysRight/BikeWatch/assets/68748397/bf2d8fae-d815-4bb4-a606-74e59b363191)
+![image](https://github.com/DeysRight/BikeWatch-Backend/assets/68748397/39e6fb7c-d3a7-45ef-959f-bb625d533fc1)
 
+## ✅ Commit 컨벤션
 ```
 --------------------------------------------------------------------------
 feat : 새로운 기능 추가
