@@ -10,6 +10,7 @@ https://api.bikewatch.shop/swagger-ui/index.html
 
 ![image](https://github.com/DeysRight/BikeWatch-Backend/assets/68748397/39e6fb7c-d3a7-45ef-959f-bb625d533fc1)
 
+## ✅ Commit 컨벤션
 ```
 --------------------------------------------------------------------------
 feat : 새로운 기능 추가
