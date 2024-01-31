@@ -1,24 +1,31 @@
-package com.bikeWatch.board.domain;
+package com.bikeWatch.menu.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bikeWatch.board.domain.Board;
+import com.bikeWatch.category.domain.Category;
 import com.bikeWatch.common.domain.BaseTimeEntity;
-import com.bikeWatch.menu.domain.Menu;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
 @Getter
-public class Board extends BaseTimeEntity {
+@ToString
+public class Menu extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,17 +33,16 @@ public class Board extends BaseTimeEntity {
 
 	private String title;
 
-	@Lob
-	private String content;
-
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "menu_id")
-	private Menu menu;
+	@JoinColumn(name = "category_id")
+	private Category category;
+
+	@OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true)
+	List<Board> boards = new ArrayList<>();
 
 	@Builder
-	public Board(String title, String content, Menu menu) {
+	public Menu(String title, Category category) {
 		this.title = title;
-		this.content = content;
-		this.menu = menu;
+		this.category = category;
 	}
 }

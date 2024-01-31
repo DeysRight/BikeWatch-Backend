@@ -1,7 +1,9 @@
 package com.bikeWatch.board.dto.request;
 
+import com.bikeWatch.board.domain.Board;
+import com.bikeWatch.menu.domain.Menu;
+
 import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
 
 public record BoardCreateRequest(
 
@@ -11,9 +13,11 @@ public record BoardCreateRequest(
 	@NotBlank(message = "내용을 입력해주세요.")
 	String content) {
 
-	@Builder
-	public BoardCreateRequest(String title, String content) {
-		this.title = title;
-		this.content = content;
+	public Board toEntity(Menu menu) {
+		return Board.builder()
+			.title(title)
+			.content(content)
+			.menu(menu)
+			.build();
 	}
 }

@@ -12,6 +12,14 @@ public enum ErrorCode {
 
 	// Board
 
+	// Category
+	NOT_FOUND_CATEGORY(HttpStatus.NOT_FOUND, "해당하는 카테고리가 존재하지 않습니다."),
+	DUPLICATION_CATEGORY(HttpStatus.BAD_REQUEST, "카테고리명이 존재합니다."),
+
+	// Menu
+	NOT_FOUND_MENU(HttpStatus.NOT_FOUND, "해당하는 메뉴가 존재하지 않습니다."),
+	DUPLICATION_MENU(HttpStatus.BAD_REQUEST, "메뉴명이 존재합니다."),
+
 	// Client Error
 	BAD_REQUEST_ERROR(HttpStatus.BAD_REQUEST, "요청값이 잘못되었습니다."),
 

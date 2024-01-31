@@ -1,4 +1,4 @@
 package com.bikeWatch.board.dto.request;
 
-public record BoardFindRequest(String title, String content) {
+public record BoardFindRequest(String keyword) {
 }

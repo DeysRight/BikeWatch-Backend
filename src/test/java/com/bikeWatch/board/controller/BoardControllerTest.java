@@ -7,11 +7,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.bikeWatch.board.dto.request.BoardCreateRequest;
+import com.bikeWatch.board.service.BoardService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(controllers = BoardController.class)
@@ -20,6 +22,9 @@ class BoardControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 
+	@MockBean
+	private BoardService boardService;
+
 	@Autowired
 	private ObjectMapper objectMapper;
 
@@ -27,13 +32,12 @@ class BoardControllerTest {
 	@Test
 	void 게시글_등록() throws Exception {
 		// given
-		BoardCreateRequest request = BoardCreateRequest.builder()
-			.title("슈퍼커브")
-			.content("슈퍼커브는 ~ 이다.")
-			.build();
+		BoardCreateRequest request =
+			new BoardCreateRequest("슈퍼커브", "슈퍼커브는 ~ 이다.");
+		Long menuId = 1L;
 
 		// when & then
-		mockMvc.perform(MockMvcRequestBuilders.post("/api/boards")
+		mockMvc.perform(MockMvcRequestBuilders.post("/api/boards/" + menuId)
 				.content(objectMapper.writeValueAsString(request))
 				.contentType(MediaType.APPLICATION_JSON))
 			.andDo(print())

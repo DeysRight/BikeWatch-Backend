@@ -1,6 +1,7 @@
 package com.bikeWatch.board.dto.response;
 
 import com.bikeWatch.board.domain.Board;
+import com.querydsl.core.annotations.QueryProjection;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
@@ -16,6 +17,7 @@ public record BoardFindResponse(
 	@Schema(description = "게시글 내용")
 	String content) {
 	@Builder
+	@QueryProjection
 	public BoardFindResponse(Long id, String title, String content) {
 		this.id = id;
 		this.title = title;
