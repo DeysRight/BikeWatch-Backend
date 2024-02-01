@@ -11,6 +11,7 @@ import lombok.Getter;
 public enum ErrorCode {
 
 	// Board
+	NOT_FOUND_BOARD(HttpStatus.NOT_FOUND, "해당하는 게시글이 존재하지 않습니다."),
 
 	// Category
 	NOT_FOUND_CATEGORY(HttpStatus.NOT_FOUND, "해당하는 카테고리가 존재하지 않습니다."),

@@ -3,11 +3,11 @@ package com.bikeWatch.board.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.bikeWatch.board.dto.response.BoardFindResponse;
+import com.bikeWatch.board.dto.response.FindBoardResponse;
 
 public interface BoardRepositoryCustom {
 
-	Page<BoardFindResponse> getBoardListByKeyword(Pageable pageable, String keyword);
+	Page<FindBoardResponse> getListByKeyword(Pageable pageable, String keyword);
 
-	Page<BoardFindResponse> getBoardListByMenu(Pageable pageable, Long menuId);
+	Page<FindBoardResponse> getListByMenu(Pageable pageable, Long menuId);
 }

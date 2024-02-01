@@ -6,7 +6,7 @@ import com.querydsl.core.annotations.QueryProjection;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 
-public record BoardFindResponse(
+public record FindBoardResponse(
 
 	@Schema(description = "게시글 번호")
 	Long id,
@@ -18,14 +18,14 @@ public record BoardFindResponse(
 	String content) {
 	@Builder
 	@QueryProjection
-	public BoardFindResponse(Long id, String title, String content) {
+	public FindBoardResponse(Long id, String title, String content) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
 	}
 
-	public static BoardFindResponse of(Board board) {
-		return BoardFindResponse.builder()
+	public static FindBoardResponse of(Board board) {
+		return FindBoardResponse.builder()
 			.id(board.getId())
 			.title(board.getTitle())
 			.content(board.getContent())

@@ -6,14 +6,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bikeWatch.board.dto.request.BoardCreateRequest;
-import com.bikeWatch.board.dto.response.BoardCreateResponse;
-import com.bikeWatch.board.dto.response.BoardFindResponse;
+import com.bikeWatch.board.dto.request.CreateBoardRequest;
+import com.bikeWatch.board.dto.request.UpdateBoardRequest;
+import com.bikeWatch.board.dto.response.CreateBoardResponse;
+import com.bikeWatch.board.dto.response.FindBoardResponse;
+import com.bikeWatch.board.dto.response.UpdateBoardResponse;
 import com.bikeWatch.board.service.BoardService;
 import com.bikeWatch.common.domain.ApiResponse;
 
@@ -32,23 +35,30 @@ public class BoardController {
 
 	@Operation(summary = "게시판 조회 API by.키워드", description = "제목 또는 내용에 키워드를 포함하는 게시판을 조회합니다.")
 	@GetMapping
-	public ApiResponse<Page<BoardFindResponse>> getBoardListByKeyword(Pageable pageable,
+	public ApiResponse<Page<FindBoardResponse>> getBoardListByKeyword(Pageable pageable,
 		@RequestParam(name = "keyword") String keyword) {
-		return ApiResponse.ok(boardService.getBoardListByKeyword(pageable, keyword));
+		return ApiResponse.ok(boardService.getListByKeyword(pageable, keyword));
 	}
 
 	@Operation(summary = "게시판 조회 API by.메뉴", description = "선택한 메뉴의 게시판을 조회합니다.")
 	@GetMapping("/{menuId}")
-	public ApiResponse<Page<BoardFindResponse>> getBoardListByMenu(Pageable pageable,
+	public ApiResponse<Page<FindBoardResponse>> getBoardListByMenu(Pageable pageable,
 		@PathVariable(name = "menuId") Long menuId) {
-		return ApiResponse.ok(boardService.getBoardListByMenu(pageable, menuId));
+		return ApiResponse.ok(boardService.getListByMenu(pageable, menuId));
 	}
 
 	@Operation(summary = "게시글 등록", description = "선택한 메뉴에 게시글을 등록합니다.")
 	@PostMapping("/{menuId}")
-	public ApiResponse<BoardCreateResponse> createBoard(@Valid @RequestBody BoardCreateRequest req,
+	public ApiResponse<CreateBoardResponse> createBoard(@RequestBody @Valid CreateBoardRequest req,
 		@PathVariable(name = "menuId") Long menuId) {
-		return ApiResponse.of(HttpStatus.CREATED, boardService.createBoard(req, menuId));
+		return ApiResponse.of(HttpStatus.CREATED, boardService.create(req, menuId));
+	}
+
+	@Operation(summary = "게시글 수정", description = "게시글을 수정합니다.")
+	@PutMapping("/{boardId}")
+	public ApiResponse<UpdateBoardResponse> updateBoard(@RequestBody @Valid UpdateBoardRequest req,
+		@PathVariable(name = "boardId") Long boardId) {
+		return ApiResponse.of(HttpStatus.CREATED, boardService.update(req, boardId));
 	}
 
 }

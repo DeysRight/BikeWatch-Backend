@@ -1,4 +1,4 @@
-package com.bikeWatch.menu.dto;
+package com.bikeWatch.menu.dto.request;
 
 import com.bikeWatch.category.domain.Category;
 import com.bikeWatch.menu.domain.Menu;
@@ -6,7 +6,7 @@ import com.bikeWatch.menu.domain.Menu;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
-public record MenuCreateRequest(
+public record CreateMenuRequest(
 
 	@Positive
 	Long categoryId,

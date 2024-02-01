@@ -10,8 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 
-import com.bikeWatch.board.dto.response.BoardFindResponse;
-import com.bikeWatch.board.dto.response.QBoardFindResponse;
+import com.bikeWatch.board.dto.response.FindBoardResponse;
+import com.bikeWatch.board.dto.response.QFindBoardResponse;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -25,9 +25,9 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
 	private final JPAQueryFactory jpaQueryFactory;
 
 	@Override
-	public Page<BoardFindResponse> getBoardListByKeyword(Pageable pageable, String keyword) {
-		List<BoardFindResponse> content = jpaQueryFactory
-			.select(new QBoardFindResponse(
+	public Page<FindBoardResponse> getListByKeyword(Pageable pageable, String keyword) {
+		List<FindBoardResponse> content = jpaQueryFactory
+			.select(new QFindBoardResponse(
 				board.id,
 				board.title,
 				board.content))
@@ -46,9 +46,9 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
 	}
 
 	@Override
-	public Page<BoardFindResponse> getBoardListByMenu(Pageable pageable, Long menuId) {
-		List<BoardFindResponse> content = jpaQueryFactory
-			.select(new QBoardFindResponse(
+	public Page<FindBoardResponse> getListByMenu(Pageable pageable, Long menuId) {
+		List<FindBoardResponse> content = jpaQueryFactory
+			.select(new QFindBoardResponse(
 				board.id,
 				board.title,
 				board.content))

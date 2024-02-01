@@ -11,12 +11,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Board extends BaseTimeEntity {
 
@@ -38,5 +39,12 @@ public class Board extends BaseTimeEntity {
 		this.title = title;
 		this.content = content;
 		this.menu = menu;
+	}
+
+	public Board update(String title, String content) {
+		this.title = title;
+		this.content = content;
+
+		return this;
 	}
 }

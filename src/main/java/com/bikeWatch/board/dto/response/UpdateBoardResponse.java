@@ -7,28 +7,27 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Builder;
 
-public record BoardCreateResponse(
-
+public record UpdateBoardResponse(
 	Long id,
 	String title,
 	String content,
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	LocalDateTime createdDateTime) {
+	LocalDateTime modifiedDateTime) {
 	@Builder
-	public BoardCreateResponse(Long id, String title, String content, LocalDateTime createdDateTime) {
+	public UpdateBoardResponse(Long id, String title, String content, LocalDateTime modifiedDateTime) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
-		this.createdDateTime = createdDateTime;
+		this.modifiedDateTime = modifiedDateTime;
 	}
 
-	public static BoardCreateResponse of(Board board) {
-		return BoardCreateResponse.builder()
+	public static UpdateBoardResponse of(Board board) {
+		return UpdateBoardResponse.builder()
 			.id(board.getId())
 			.title(board.getTitle())
 			.content(board.getContent())
-			.createdDateTime(board.getCreatedDateTime())
+			.modifiedDateTime(board.getModifiedDateTime())
 			.build();
 	}
 }

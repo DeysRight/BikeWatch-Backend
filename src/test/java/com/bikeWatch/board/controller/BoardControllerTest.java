@@ -12,7 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.bikeWatch.board.dto.request.BoardCreateRequest;
+import com.bikeWatch.board.dto.request.CreateBoardRequest;
 import com.bikeWatch.board.service.BoardService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -32,8 +32,8 @@ class BoardControllerTest {
 	@Test
 	void 게시글_등록() throws Exception {
 		// given
-		BoardCreateRequest request =
-			new BoardCreateRequest("슈퍼커브", "슈퍼커브는 ~ 이다.");
+		CreateBoardRequest request =
+			new CreateBoardRequest("슈퍼커브", "슈퍼커브는 ~ 이다.");
 		Long menuId = 1L;
 
 		// when & then

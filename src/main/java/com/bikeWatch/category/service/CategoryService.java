@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bikeWatch.category.domain.Category;
-import com.bikeWatch.category.dto.CategoryCreateRequest;
-import com.bikeWatch.category.dto.CategoryCreateResponse;
+import com.bikeWatch.category.dto.request.CreateCategoryRequest;
+import com.bikeWatch.category.dto.response.CreateCategoryResponse;
 import com.bikeWatch.category.repository.CategoryRepository;
 import com.bikeWatch.common.error.ErrorCode;
 import com.bikeWatch.common.error.exception.BadRequestException;
@@ -20,7 +20,7 @@ public class CategoryService {
 	private final CategoryRepository categoryRepository;
 
 	@Transactional
-	public CategoryCreateResponse createCategory(CategoryCreateRequest req) {
+	public CreateCategoryResponse createCategory(CreateCategoryRequest req) {
 		boolean existsCategoryTitle = categoryRepository.existsByTitle(req.categoryTitle());
 
 		if (existsCategoryTitle) {
@@ -28,6 +28,6 @@ public class CategoryService {
 		}
 		Category category = categoryRepository.save(req.toEntity());
 
-		return CategoryCreateResponse.of(category);
+		return CreateCategoryResponse.of(category);
 	}
 }

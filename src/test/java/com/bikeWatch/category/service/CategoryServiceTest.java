@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.bikeWatch.category.dto.CategoryCreateRequest;
-import com.bikeWatch.category.dto.CategoryCreateResponse;
+import com.bikeWatch.category.dto.request.CreateCategoryRequest;
+import com.bikeWatch.category.dto.response.CreateCategoryResponse;
 
 @SpringBootTest
 class CategoryServiceTest {
@@ -21,14 +21,14 @@ class CategoryServiceTest {
 	void createCategory() {
 		// given
 		String categoryName = "오토바이";
-		CategoryCreateRequest categoryCreateRequest = CategoryCreateRequest.builder()
+		CreateCategoryRequest createCategoryRequest = CreateCategoryRequest.builder()
 			.categoryTitle(categoryName)
 			.build();
 
 		// when
-		CategoryCreateResponse categoryCreateResponse = categoryService.createCategory(categoryCreateRequest);
+		CreateCategoryResponse createCategoryResponse = categoryService.createCategory(createCategoryRequest);
 
 		// then
-		assertThat(categoryCreateResponse.title()).isEqualTo(categoryName);
+		assertThat(createCategoryResponse.title()).isEqualTo(categoryName);
 	}
 }

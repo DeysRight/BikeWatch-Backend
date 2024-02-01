@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bikeWatch.category.dto.CategoryCreateRequest;
-import com.bikeWatch.category.dto.CategoryCreateResponse;
+import com.bikeWatch.category.dto.request.CreateCategoryRequest;
+import com.bikeWatch.category.dto.response.CreateCategoryResponse;
 import com.bikeWatch.category.service.CategoryService;
 import com.bikeWatch.menu.domain.Menu;
-import com.bikeWatch.menu.dto.MenuCreateRequest;
+import com.bikeWatch.menu.dto.request.CreateMenuRequest;
 import com.bikeWatch.menu.repository.MenuRepository;
 
 @SpringBootTest
@@ -35,20 +35,20 @@ class MenuServiceTest {
 	void createMenu() {
 		// given
 		String categoryTitle = "오토바이";
-		CategoryCreateRequest categoryCreateRequest = CategoryCreateRequest.builder()
+		CreateCategoryRequest createCategoryRequest = CreateCategoryRequest.builder()
 			.categoryTitle(categoryTitle)
 			.build();
-		CategoryCreateResponse categoryCreateResponse = categoryService.createCategory(categoryCreateRequest);
-		Long categoryId = categoryCreateResponse.id();
+		CreateCategoryResponse createCategoryResponse = categoryService.createCategory(createCategoryRequest);
+		Long categoryId = createCategoryResponse.id();
 
 		String menuTitle1 = "슈퍼커브";
 		String menuTitle2 = "시티";
-		MenuCreateRequest menuCreateRequest1 = new MenuCreateRequest(categoryId, menuTitle1);
-		MenuCreateRequest menuCreateRequest2 = new MenuCreateRequest(categoryId, menuTitle2);
+		CreateMenuRequest createMenuRequest1 = new CreateMenuRequest(categoryId, menuTitle1);
+		CreateMenuRequest createMenuRequest2 = new CreateMenuRequest(categoryId, menuTitle2);
 
 		// when
-		menuService.createMenu(menuCreateRequest1);
-		menuService.createMenu(menuCreateRequest2);
+		menuService.createMenu(createMenuRequest1);
+		menuService.createMenu(createMenuRequest2);
 		List<Menu> menus = menuRepository.findAll();
 
 		// then

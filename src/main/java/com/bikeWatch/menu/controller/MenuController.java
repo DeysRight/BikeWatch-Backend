@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bikeWatch.category.dto.CategoryCreateResponse;
+import com.bikeWatch.category.dto.response.CreateCategoryResponse;
 import com.bikeWatch.common.domain.ApiResponse;
-import com.bikeWatch.menu.dto.MenuCreateRequest;
+import com.bikeWatch.menu.dto.request.CreateMenuRequest;
 import com.bikeWatch.menu.service.MenuService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,7 +26,7 @@ public class MenuController {
 
 	@Operation(summary = "메뉴 생성", description = "메뉴를 생성합니다.")
 	@PostMapping
-	public ApiResponse<CategoryCreateResponse> createCategory(@Valid @RequestBody MenuCreateRequest req) {
+	public ApiResponse<CreateCategoryResponse> createCategory(@Valid @RequestBody CreateMenuRequest req) {
 		menuService.createMenu(req);
 		return ApiResponse.of(HttpStatus.CREATED, null);
 	}

@@ -12,9 +12,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import com.bikeWatch.board.domain.Board;
-import com.bikeWatch.board.dto.request.BoardCreateRequest;
-import com.bikeWatch.board.dto.response.BoardCreateResponse;
-import com.bikeWatch.board.dto.response.BoardFindResponse;
+import com.bikeWatch.board.dto.request.CreateBoardRequest;
+import com.bikeWatch.board.dto.request.UpdateBoardRequest;
+import com.bikeWatch.board.dto.response.CreateBoardResponse;
+import com.bikeWatch.board.dto.response.FindBoardResponse;
+import com.bikeWatch.board.dto.response.UpdateBoardResponse;
 import com.bikeWatch.board.repository.BoardRepository;
 import com.bikeWatch.category.domain.Category;
 import com.bikeWatch.category.repository.CategoryRepository;
@@ -38,9 +40,9 @@ public class BoardServiceTest {
 
 	@DisplayName("선택한 메뉴에 게시글을 등록한다.")
 	@Test
-	void createBoard() {
+	void create() {
 		// given
-		BoardCreateRequest req = new BoardCreateRequest("게시글 제목", "내용 부분");
+		CreateBoardRequest req = new CreateBoardRequest("게시글 제목", "내용 부분");
 		Category category = Category.builder().title("카테고리").build();
 		Menu menu = Menu.builder().title("메뉴").category(category).build();
 
@@ -50,16 +52,39 @@ public class BoardServiceTest {
 		Long menuId = saveMenu.getId();
 
 		// when
-		BoardCreateResponse boardCreateResponse = boardService.createBoard(req, menuId);
+		CreateBoardResponse createBoardResponse = boardService.create(req, menuId);
 
 		// then
-		assertThat(boardCreateResponse.title()).isEqualTo(req.title());
-		assertThat(boardCreateResponse.content()).isEqualTo(req.content());
+		assertThat(createBoardResponse.title()).isEqualTo(req.title());
+		assertThat(createBoardResponse.content()).isEqualTo(req.content());
+	}
+
+	@DisplayName("해당 게시글을 수정한다.")
+	@Test
+	void update() {
+		// given
+		Category category = Category.builder().title("카테고리명").build();
+		categoryRepository.save(category);
+
+		Menu menu = Menu.builder().title("메뉴명").category(category).build();
+		menuRepository.save(menu);
+
+		Board board = Board.builder().title("게시글 제목").content("게시글 내용").menu(menu).build();
+		boardRepository.save(board);
+
+		UpdateBoardRequest req = new UpdateBoardRequest("게시글 수정 제목", "내용 수정");
+
+		// when
+		UpdateBoardResponse updatedBoard = boardService.update(req, board.getId());
+
+		// then
+		assertThat(updatedBoard.title()).isEqualTo(req.title());
+		assertThat(updatedBoard.content()).isEqualTo(req.content());
 	}
 
 	@DisplayName("제목 또는 내용에 키워드를 포함하는 게시판을 조회한다.")
 	@Test
-	void getBoardListByKeyword() {
+	void getListByKeyword() {
 		// given
 		Board board1 = Board.builder().title("슈퍼커브").content("슈퍼커브 내용").build();
 		Board board2 = Board.builder().title("시티").content("시티 내용").build();
@@ -68,13 +93,13 @@ public class BoardServiceTest {
 		PageRequest pageRequest = PageRequest.of(0, 5);
 
 		// when
-		Page<BoardFindResponse> boardFindResponses = boardService.getBoardListByKeyword(pageRequest, "커브");
+		Page<FindBoardResponse> boardFindResponses = boardService.getListByKeyword(pageRequest, "커브");
 
 		// then
 		assertThat(boardFindResponses.getContent())
 			.hasSize(1) // 결과 리스트 크기
 			.containsExactlyInAnyOrder(
-				BoardFindResponse.builder()
+				FindBoardResponse.builder()
 					.id(1L).title("슈퍼커브").content("슈퍼커브 내용").build()
 			);
 		assertThat(boardFindResponses.getTotalElements()).isEqualTo(1); // 전체 엔터티 수
@@ -86,7 +111,7 @@ public class BoardServiceTest {
 
 	@DisplayName("선택한 메뉴의 게시판을 조회한다.")
 	@Test
-	void getBoardListByMenu() {
+	void getListByMenu() {
 		// given
 		Category category1 = Category.builder().title("카테고리1").build();
 		Category category2 = Category.builder().title("카테고리2").build();
@@ -104,7 +129,7 @@ public class BoardServiceTest {
 		PageRequest pageRequest = PageRequest.of(1, 10);
 
 		// when
-		Page<BoardFindResponse> boardFindResponses = boardService.getBoardListByMenu(pageRequest, menus.get(1).getId());
+		Page<FindBoardResponse> boardFindResponses = boardService.getListByMenu(pageRequest, menus.get(1).getId());
 
 		// then
 		assertThat(boardFindResponses.getContent()).hasSize(10);
