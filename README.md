@@ -1,9 +1,11 @@
 # BikeWatch
 
 ## ✅ 바이크워치(BikeWatch) 서비스
+
 https://bikewatch.shop
 
 ## ✅ 바이크워치(BikeWatch) API 명세서
+
 https://api.bikewatch.shop/swagger-ui/index.html
 
 ## ✅ Branch 전략(Github Flow)
@@ -11,6 +13,7 @@ https://api.bikewatch.shop/swagger-ui/index.html
 ![image](https://github.com/DeysRight/BikeWatch-Backend/assets/68748397/39e6fb7c-d3a7-45ef-959f-bb625d533fc1)
 
 ## ✅ Commit 컨벤션
+
 ```
 --------------------------------------------------------------------------
 feat : 새로운 기능 추가
@@ -36,3 +39,4 @@ https://bestinu.tistory.com/64
 - Gradle 8.5
 - GitHub Actions
 - Swagger
+- S3

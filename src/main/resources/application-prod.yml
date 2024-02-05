@@ -10,3 +10,21 @@ spring:
 
 logging.level:
   org.hibernate.SQL: info
+
+cloud:
+  aws:
+    credentials:
+      access-key: ${ ACCESS_KEY }
+      secret-key: ${ SECRET_KEY }
+    s3:
+      bucket: ${ BUCKET }
+    region:
+      static: ${ AP-NORTHEAST-2 }
+    stack:
+      auto: false
+
+servlet:
+  multipart:
+    enabled: true
+    max-file-size: 20MB
+    max-request-size: 20MB

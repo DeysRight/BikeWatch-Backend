@@ -60,5 +60,4 @@ public class BoardController {
 		@PathVariable(name = "boardId") Long boardId) {
 		return ApiResponse.of(HttpStatus.CREATED, boardService.update(req, boardId));
 	}
-
 }
