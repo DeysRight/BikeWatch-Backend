@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 
 public record FindBoardResponse(
-
 	@Schema(description = "게시글 번호")
 	Long id,
 

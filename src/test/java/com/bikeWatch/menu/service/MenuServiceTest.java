@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bikeWatch.category.domain.Category;
 import com.bikeWatch.category.dto.request.CreateCategoryRequest;
-import com.bikeWatch.category.dto.response.CreateCategoryResponse;
+import com.bikeWatch.category.repository.CategoryRepository;
 import com.bikeWatch.category.service.CategoryService;
 import com.bikeWatch.menu.domain.Menu;
 import com.bikeWatch.menu.dto.request.CreateMenuRequest;
@@ -27,6 +28,9 @@ class MenuServiceTest {
 	private CategoryService categoryService;
 
 	@Autowired
+	private CategoryRepository categoryRepository;
+
+	@Autowired
 	private MenuRepository menuRepository;
 
 	@DisplayName("카테고리의 하위로 메뉴를 생성한다.")
@@ -36,10 +40,11 @@ class MenuServiceTest {
 		// given
 		String categoryTitle = "오토바이";
 		CreateCategoryRequest createCategoryRequest = CreateCategoryRequest.builder()
-			.categoryTitle(categoryTitle)
+			.title(categoryTitle)
 			.build();
-		CreateCategoryResponse createCategoryResponse = categoryService.createCategory(createCategoryRequest);
-		Long categoryId = createCategoryResponse.id();
+		categoryService.createCategory(createCategoryRequest);
+		List<Category> categories = categoryRepository.findAll();
+		Long categoryId = categories.get(0).getId();
 
 		String menuTitle1 = "슈퍼커브";
 		String menuTitle2 = "시티";

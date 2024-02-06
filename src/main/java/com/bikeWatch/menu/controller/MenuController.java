@@ -1,14 +1,17 @@
 package com.bikeWatch.menu.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bikeWatch.category.dto.response.CreateCategoryResponse;
 import com.bikeWatch.common.domain.ApiResponse;
 import com.bikeWatch.menu.dto.request.CreateMenuRequest;
+import com.bikeWatch.menu.dto.request.UpdateMenuRequest;
 import com.bikeWatch.menu.service.MenuService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,8 +29,26 @@ public class MenuController {
 
 	@Operation(summary = "메뉴 생성", description = "메뉴를 생성합니다.")
 	@PostMapping
-	public ApiResponse<CreateCategoryResponse> createCategory(@Valid @RequestBody CreateMenuRequest req) {
+	public ApiResponse<Void> createMenu(@RequestBody @Valid CreateMenuRequest req) {
 		menuService.createMenu(req);
+
 		return ApiResponse.of(HttpStatus.CREATED, null);
+	}
+
+	@Operation(summary = "메뉴 수정", description = "메뉴를 수정합니다.")
+	@PutMapping("{menuId}")
+	public ApiResponse<Void> updateMenu(@RequestBody @Valid UpdateMenuRequest req,
+		@PathVariable(value = "menuId") Long menuId) {
+		menuService.updateMenu(req, menuId);
+
+		return ApiResponse.of(HttpStatus.CREATED, null);
+	}
+
+	@Operation(summary = "메뉴 삭제", description = "메뉴를 삭제합니다.")
+	@DeleteMapping("{menuId}")
+	public ApiResponse<Void> deleteMenu(@PathVariable(value = "menuId") Long menuId) {
+		menuService.deleteMenu(menuId);
+
+		return ApiResponse.of(HttpStatus.RESET_CONTENT, null);
 	}
 }

@@ -44,4 +44,8 @@ public class Menu extends BaseTimeEntity {
 		this.title = title;
 		this.category = category;
 	}
+
+	public void changeTitle(String title) {
+		this.title = title;
+	}
 }

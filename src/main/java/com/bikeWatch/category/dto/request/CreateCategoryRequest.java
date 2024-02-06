@@ -6,16 +6,15 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 
 public record CreateCategoryRequest(
-
 	@NotBlank(message = "카테고리 이름을 입력해주세요.")
-	String categoryTitle) {
+	String title) {
 
 	@Builder
-	public CreateCategoryRequest(String categoryTitle) {
-		this.categoryTitle = categoryTitle;
+	public CreateCategoryRequest(String title) {
+		this.title = title;
 	}
 
 	public Category toEntity() {
-		return Category.builder().title(categoryTitle).build();
+		return Category.builder().title(title).build();
 	}
 }

@@ -30,7 +30,7 @@ public class BoardService {
 	private final EntityManager entityManager;
 
 	@Transactional
-	public CreateBoardResponse create(CreateBoardRequest req, Long menuId) {
+	public CreateBoardResponse createBoard(CreateBoardRequest req, Long menuId) {
 		Menu menu = menuRepository.findById(menuId)
 			.orElseThrow(() -> new BadRequestException(ErrorCode.NOT_FOUND_MENU));
 		Board board = boardRepository.save(req.toEntity(menu));
@@ -39,13 +39,14 @@ public class BoardService {
 	}
 
 	@Transactional
-	public UpdateBoardResponse update(UpdateBoardRequest req, Long boardId) {
+	public UpdateBoardResponse updateBoard(UpdateBoardRequest req, Long boardId) {
 		Board board = boardRepository.findById(boardId)
 			.orElseThrow(() -> new BadRequestException(ErrorCode.NOT_FOUND_BOARD));
-		Board updated = board.update(req.title(), req.content());
+		Board updatedBoard = board.updateTitleAndContent(req.title(), req.content());
+
 		entityManager.flush();
 
-		return UpdateBoardResponse.of(updated);
+		return UpdateBoardResponse.of(updatedBoard);
 	}
 
 	public Page<FindBoardResponse> getListByKeyword(Pageable pageable, String keyword) {
@@ -54,5 +55,9 @@ public class BoardService {
 
 	public Page<FindBoardResponse> getListByMenu(Pageable pageable, Long menuId) {
 		return boardRepository.getListByMenu(pageable, menuId);
+	}
+
+	public void deleteBoard(Long boardId) {
+		boardRepository.deleteById(boardId);
 	}
 }

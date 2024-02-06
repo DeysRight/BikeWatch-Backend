@@ -52,7 +52,7 @@ public class BoardServiceTest {
 		Long menuId = saveMenu.getId();
 
 		// when
-		CreateBoardResponse createBoardResponse = boardService.create(req, menuId);
+		CreateBoardResponse createBoardResponse = boardService.createBoard(req, menuId);
 
 		// then
 		assertThat(createBoardResponse.title()).isEqualTo(req.title());
@@ -75,7 +75,7 @@ public class BoardServiceTest {
 		UpdateBoardRequest req = new UpdateBoardRequest("게시글 수정 제목", "내용 수정");
 
 		// when
-		UpdateBoardResponse updatedBoard = boardService.update(req, board.getId());
+		UpdateBoardResponse updatedBoard = boardService.updateBoard(req, board.getId());
 
 		// then
 		assertThat(updatedBoard.title()).isEqualTo(req.title());
