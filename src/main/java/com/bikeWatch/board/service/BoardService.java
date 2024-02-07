@@ -50,11 +50,21 @@ public class BoardService {
 	}
 
 	public Page<FindBoardResponse> getListByKeyword(Pageable pageable, String keyword) {
-		return boardRepository.getListByKeyword(pageable, keyword);
+		Page<FindBoardResponse> listByKeyword = boardRepository.getListByKeyword(pageable, keyword);
+
+		if (listByKeyword.isEmpty()) {
+			throw new BadRequestException(ErrorCode.NOT_FOUND_BOARD);
+		}
+		return listByKeyword;
 	}
 
 	public Page<FindBoardResponse> getListByMenu(Pageable pageable, Long menuId) {
-		return boardRepository.getListByMenu(pageable, menuId);
+		Page<FindBoardResponse> listByMenu = boardRepository.getListByMenu(pageable, menuId);
+
+		if (listByMenu.isEmpty()) {
+			throw new BadRequestException(ErrorCode.NOT_FOUND_BOARD);
+		}
+		return listByMenu;
 	}
 
 	public void deleteBoard(Long boardId) {

@@ -58,7 +58,7 @@ public class BoardController {
 	@Operation(summary = "게시판 조회 API by.키워드", description = "제목 또는 내용에 키워드를 포함하는 게시판을 조회합니다.")
 	@GetMapping
 	public ApiResponse<Page<FindBoardResponse>> getBoardListByKeyword(Pageable pageable,
-		@RequestParam(name = "keyword") String keyword) {
+		@RequestParam(name = "keyword", required = false) String keyword) {
 		return ApiResponse.ok(boardService.getListByKeyword(pageable, keyword));
 	}
 
