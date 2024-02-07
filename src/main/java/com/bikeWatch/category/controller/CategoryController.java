@@ -1,7 +1,10 @@
 package com.bikeWatch.category.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bikeWatch.category.dto.request.CreateCategoryRequest;
 import com.bikeWatch.category.dto.request.UpdateCategoryRequest;
+import com.bikeWatch.category.dto.response.FindCategoryResponse;
 import com.bikeWatch.category.service.CategoryService;
 import com.bikeWatch.common.domain.ApiResponse;
 
@@ -53,5 +57,9 @@ public class CategoryController {
 		return ApiResponse.of(HttpStatus.NO_CONTENT, null);
 	}
 
-	// TODO: 카테고리 + 메뉴 조회
+	@Operation(summary = "카테고리와 하위 메뉴 조회", description = "카테고리와 그 하위의 메뉴를 조회합니다.")
+	@GetMapping("/menus")
+	public ApiResponse<List<FindCategoryResponse>> findCategoryAndMenu() {
+		return ApiResponse.ok(categoryService.findCategoryAndMenu());
+	}
 }

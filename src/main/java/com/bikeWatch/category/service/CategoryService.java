@@ -1,11 +1,14 @@
 package com.bikeWatch.category.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bikeWatch.category.domain.Category;
 import com.bikeWatch.category.dto.request.CreateCategoryRequest;
 import com.bikeWatch.category.dto.request.UpdateCategoryRequest;
+import com.bikeWatch.category.dto.response.FindCategoryResponse;
 import com.bikeWatch.category.repository.CategoryRepository;
 import com.bikeWatch.common.error.ErrorCode;
 import com.bikeWatch.common.error.exception.BadRequestException;
@@ -49,5 +52,12 @@ public class CategoryService {
 			throw new BadRequestException(ErrorCode.NOT_REMOVE_CATEGORY);
 		}
 		categoryRepository.deleteById(categoryId);
+	}
+
+	public List<FindCategoryResponse> findCategoryAndMenu() {
+		return categoryRepository.findCategoryAndMenu()
+			.stream()
+			.map(FindCategoryResponse::of)
+			.toList();
 	}
 }
