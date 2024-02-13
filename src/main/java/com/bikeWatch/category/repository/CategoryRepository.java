@@ -11,6 +11,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
 	boolean existsByTitle(String categoryTitle);
 
-	@Query("SELECT DISTINCT c FROM Category c JOIN FETCH c.menus")
+	@Query("SELECT DISTINCT c FROM Category c LEFT OUTER JOIN FETCH c.menus")
 	List<Category> findCategoryAndMenu();
 }
