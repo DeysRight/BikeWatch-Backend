@@ -7,12 +7,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import com.bikeWatch.user.domain.Role;
 
 @Configuration
 @EnableWebSecurity
@@ -28,14 +25,14 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers(new AntPathRequestMatcher("/**/admin")).hasRole(Role.ADMIN.name())
+				// .requestMatchers(new AntPathRequestMatcher("/**/admin")).hasRole(Role.ADMIN.name())
 				// "/api/categories/admin", "/api/categories/**/admin", "/api/menus/admin",
 				// "/api/menus/**/admin").hasRole(Role.ADMIN.name())
 				.anyRequest().permitAll())
 			.formLogin((form) -> form.defaultSuccessUrl("/"))
 			// .csrf(AbstractHttpConfigurer::disable)
 			// .cors(AbstractHttpConfigurer::disable)
-			.csrf().disable()
+			// .csrf().disable()
 			.cors().and()
 			.build();
 	}
