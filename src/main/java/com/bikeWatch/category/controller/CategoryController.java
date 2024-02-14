@@ -25,14 +25,14 @@ import lombok.RequiredArgsConstructor;
 
 @Tag(name = "category-controller", description = "카테고리 서비스를 위한 컨트롤러")
 @RestController
-@RequestMapping("/api/categorys")
+@RequestMapping("/api/categories")
 @RequiredArgsConstructor
 public class CategoryController {
 
 	private final CategoryService categoryService;
 
 	@Operation(summary = "카테고리 생성", description = "카테고리를 생성합니다.")
-	@PostMapping
+	@PostMapping("/admin")
 	public ApiResponse<Void> createCategory(
 		@RequestBody @Valid CreateCategoryRequest req) {
 		categoryService.createCategory(req);
@@ -41,7 +41,7 @@ public class CategoryController {
 	}
 
 	@Operation(summary = "카테고리 수정", description = "카테고리를 수정합니다.")
-	@PutMapping("{categoryId}")
+	@PutMapping("{categoryId}/admin")
 	public ApiResponse<Void> updateCategory(@RequestBody @Valid UpdateCategoryRequest req,
 		@PathVariable(value = "categoryId") Long categoryId) {
 		categoryService.updateCategory(req, categoryId);
@@ -50,7 +50,7 @@ public class CategoryController {
 	}
 
 	@Operation(summary = "카테고리 삭제", description = "카테고리를 삭제합니다.")
-	@DeleteMapping("{categoryId}")
+	@DeleteMapping("{categoryId}/admin")
 	public ApiResponse<Void> deleteCategory(@PathVariable(value = "categoryId") Long categoryId) {
 		categoryService.deleteCategory(categoryId);
 

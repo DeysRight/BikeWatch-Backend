@@ -28,7 +28,7 @@ public class MenuController {
 	private final MenuService menuService;
 
 	@Operation(summary = "메뉴 생성", description = "메뉴를 생성합니다.")
-	@PostMapping
+	@PostMapping("/admin")
 	public ApiResponse<Void> createMenu(@RequestBody @Valid CreateMenuRequest req) {
 		menuService.createMenu(req);
 
@@ -36,7 +36,7 @@ public class MenuController {
 	}
 
 	@Operation(summary = "메뉴 수정", description = "메뉴를 수정합니다.")
-	@PutMapping("{menuId}")
+	@PutMapping("{menuId}/admin")
 	public ApiResponse<Void> updateMenu(@RequestBody @Valid UpdateMenuRequest req,
 		@PathVariable(value = "menuId") Long menuId) {
 		menuService.updateMenu(req, menuId);
@@ -45,7 +45,7 @@ public class MenuController {
 	}
 
 	@Operation(summary = "메뉴 삭제", description = "메뉴를 삭제합니다.")
-	@DeleteMapping("{menuId}")
+	@DeleteMapping("{menuId}/admin")
 	public ApiResponse<Void> deleteMenu(@PathVariable(value = "menuId") Long menuId) {
 		menuService.deleteMenu(menuId);
 

@@ -35,21 +35,21 @@ public class BoardController {
 	private final BoardService boardService;
 
 	@Operation(summary = "게시글 등록", description = "선택한 메뉴에 게시글을 등록합니다.")
-	@PostMapping("/{menuId}")
+	@PostMapping("/{menuId}/admin")
 	public ApiResponse<CreateBoardResponse> createBoard(@RequestBody @Valid CreateBoardRequest req,
 		@PathVariable(name = "menuId") Long menuId) {
 		return ApiResponse.of(HttpStatus.CREATED, boardService.createBoard(req, menuId));
 	}
 
 	@Operation(summary = "게시글 수정", description = "게시글을 수정합니다.")
-	@PutMapping("/{boardId}")
+	@PutMapping("/{boardId}/admin")
 	public ApiResponse<UpdateBoardResponse> updateBoard(@RequestBody @Valid UpdateBoardRequest req,
 		@PathVariable(name = "boardId") Long boardId) {
 		return ApiResponse.of(HttpStatus.CREATED, boardService.updateBoard(req, boardId));
 	}
 
 	@Operation(summary = "게시글 삭제", description = "게시글을 삭제합니다.")
-	@DeleteMapping("{boardId}")
+	@DeleteMapping("{boardId}/admin")
 	public ApiResponse<Void> deleteBoard(@PathVariable(name = "boardId") Long boardId) {
 		boardService.deleteBoard(boardId);
 		return ApiResponse.of(HttpStatus.NO_CONTENT, null);
