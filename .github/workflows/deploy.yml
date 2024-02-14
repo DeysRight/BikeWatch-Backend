@@ -39,6 +39,14 @@ jobs:
                   secret: DB_PASSWORD
                 - name: PROFILE
                   var: PROFILE
+                - name: ACCESS_KEY
+                  secret: ACCESS_KEY
+                - name: SECRET_KEY
+                  secret: SECRET_KEY
+                - name: BUCKET
+                  secret: BUCKET
+                - name: AP-NORTHEAST-2
+                  secret: AP-NORTHEAST-2
             context:
               git:
                 url: git@github.com:${{ github.repository }}.git
