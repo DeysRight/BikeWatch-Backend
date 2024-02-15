@@ -1,4 +1,4 @@
-package com.bikeWatch.common.config;
+package com.bikeWatch.common.config.swagger;
 
 import org.springframework.context.annotation.Configuration;
 

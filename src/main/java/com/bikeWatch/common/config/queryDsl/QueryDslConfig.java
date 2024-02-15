@@ -1,4 +1,4 @@
-package com.bikeWatch.common.config;
+package com.bikeWatch.common.config.queryDsl;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
