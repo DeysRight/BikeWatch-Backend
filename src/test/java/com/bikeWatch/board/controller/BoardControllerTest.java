@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.bikeWatch.board.dto.request.CreateBoardRequest;
 import com.bikeWatch.board.service.BoardService;
+import com.bikeWatch.common.config.webMvc.VisitorStatisticsInterceptor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(controllers = BoardController.class)
@@ -24,6 +25,9 @@ class BoardControllerTest {
 
 	@MockBean
 	private BoardService boardService;
+	
+	@MockBean
+	private VisitorStatisticsInterceptor visitorStatisticsInterceptor;
 
 	@Autowired
 	private ObjectMapper objectMapper;
