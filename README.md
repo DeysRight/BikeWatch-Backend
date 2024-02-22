@@ -32,6 +32,8 @@ https://bestinu.tistory.com/64
 
 - Java 17
 - Spring Boot 3.2.1
+- Spring Security 6.2.1
+- JWT
 - JPA(Hibernate 6.4.1)
 - MariaDB 10.5
 - Querydsl 5.0
