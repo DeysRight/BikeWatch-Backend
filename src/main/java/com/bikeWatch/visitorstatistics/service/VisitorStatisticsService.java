@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bikeWatch.visitorstatistics.domain.VisitorStatistics;
-import com.bikeWatch.visitorstatistics.dto.response.TodayVisitorCountResponse;
-import com.bikeWatch.visitorstatistics.dto.response.TotalVisitorCountResponse;
+import com.bikeWatch.visitorstatistics.dto.response.VisitorCountResponse;
 import com.bikeWatch.visitorstatistics.repository.VisitorStatisticsRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -20,15 +19,12 @@ public class VisitorStatisticsService {
 
 	private final VisitorStatisticsRepository visitorStatisticsRepository;
 
-	public TodayVisitorCountResponse todayVisitorCount(LocalDate todayDate) {
-		return new TodayVisitorCountResponse(
-			visitorStatisticsRepository.countByVisitorDateTimeBetween(todayDate.atStartOfDay(),
-				todayDate.atTime(23, 59, 59)));
+	public VisitorCountResponse visitorCount(LocalDate todayDate) {
+		long todayVisitorCount = visitorStatisticsRepository.countByVisitorDateTimeBetween(todayDate.atStartOfDay(),
+			todayDate.atTime(23, 59, 59));
+		long totalVisitorCount = visitorStatisticsRepository.count();
 
-	}
-
-	public TotalVisitorCountResponse totalVisitorCount() {
-		return new TotalVisitorCountResponse(visitorStatisticsRepository.count());
+		return new VisitorCountResponse(todayVisitorCount, totalVisitorCount);
 	}
 
 	@Transactional
