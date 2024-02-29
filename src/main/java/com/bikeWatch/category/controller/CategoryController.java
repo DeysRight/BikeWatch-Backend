@@ -17,6 +17,7 @@ import com.bikeWatch.category.dto.request.UpdateCategoryRequest;
 import com.bikeWatch.category.dto.response.FindCategoryResponse;
 import com.bikeWatch.category.service.CategoryService;
 import com.bikeWatch.common.domain.ApiResponse;
+import com.bikeWatch.user.domain.Role;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,6 +36,12 @@ public class CategoryController {
 	@PostMapping("/admin")
 	public ApiResponse<Void> createCategory(
 		@RequestBody @Valid CreateCategoryRequest req) {
+
+		System.out.println(Role.ROLE_ADMIN.toString());
+		System.out.println(Role.ROLE_ADMIN.name());
+		// System.out.println(Role.ROLE_ADMIN.getLabel());
+		System.out.println(Role.ROLE_ADMIN.ordinal());
+
 		categoryService.createCategory(req);
 
 		return ApiResponse.of(HttpStatus.CREATED, null);

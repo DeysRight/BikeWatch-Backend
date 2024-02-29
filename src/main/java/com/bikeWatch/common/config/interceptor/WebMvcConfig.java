@@ -1,4 +1,4 @@
-package com.bikeWatch.common.config.webMvc;
+package com.bikeWatch.common.config.interceptor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

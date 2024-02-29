@@ -25,7 +25,7 @@ public class MenuService {
 	@Transactional
 	public void createMenu(CreateMenuRequest req) {
 		validateDuplicatedMenuTitle(req.title());
-		Category category = categoryRepository.findById(req.id())
+		Category category = categoryRepository.findById(req.categoryId())
 			.orElseThrow(() -> new BadRequestException(ErrorCode.NOT_FOUND_CATEGORY));
 
 		menuRepository.save(req.toEntity(category));

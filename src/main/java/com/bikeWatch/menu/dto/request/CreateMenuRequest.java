@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Positive;
 
 public record CreateMenuRequest(
 	@Positive
-	Long id,
+	Long categoryId,
 
 	@NotBlank(message = "메뉴 이름을 입력해주세요.")
 	String title

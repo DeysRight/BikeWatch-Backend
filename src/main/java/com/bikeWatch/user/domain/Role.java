@@ -1,12 +1,13 @@
 package com.bikeWatch.user.domain;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Getter
 public enum Role {
-	USER("사용자"),
-	ADMIN("관리자");
+	ROLE_USER("USER"),
+	ROLE_ADMIN("ADMIN");
 
 	private final String label;
-
-	Role(String label) {
-		this.label = label;
-	}
 }

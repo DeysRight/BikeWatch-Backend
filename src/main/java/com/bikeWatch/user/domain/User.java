@@ -34,7 +34,7 @@ public class User implements UserDetails {
 	private String password;
 
 	@Enumerated(value = EnumType.STRING)
-	private Role role = Role.USER;
+	private Role role = Role.ROLE_ADMIN;
 
 	@Builder
 	public User(String email, String password, Role role) {
@@ -43,7 +43,7 @@ public class User implements UserDetails {
 		this.role = role;
 	}
 
-	// 권한 반환
+	// 권한 반환 // getRole()과 같은 역할
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return List.of(new SimpleGrantedAuthority(role.name()));
