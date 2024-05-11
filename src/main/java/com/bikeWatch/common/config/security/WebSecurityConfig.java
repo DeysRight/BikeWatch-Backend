@@ -49,7 +49,7 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers(new AntPathRequestMatcher("/api/**/admin")).hasRole(Role.ROLE_ADMIN.getLabel())
+				.requestMatchers(new AntPathRequestMatcher("/api/**/admin")).hasRole(Role.ADMIN.getLabel())
 				.requestMatchers("/**").permitAll()
 				.anyRequest().authenticated()
 			)

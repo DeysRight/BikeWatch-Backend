@@ -17,7 +17,6 @@ import com.bikeWatch.category.dto.request.UpdateCategoryRequest;
 import com.bikeWatch.category.dto.response.FindCategoryResponse;
 import com.bikeWatch.category.service.CategoryService;
 import com.bikeWatch.common.domain.ApiResponse;
-import com.bikeWatch.user.domain.Role;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,14 +33,7 @@ public class CategoryController {
 
 	@Operation(summary = "카테고리 생성", description = "카테고리를 생성합니다.")
 	@PostMapping("/admin")
-	public ApiResponse<Void> createCategory(
-		@RequestBody @Valid CreateCategoryRequest req) {
-
-		System.out.println(Role.ROLE_ADMIN.toString());
-		System.out.println(Role.ROLE_ADMIN.name());
-		// System.out.println(Role.ROLE_ADMIN.getLabel());
-		System.out.println(Role.ROLE_ADMIN.ordinal());
-
+	public ApiResponse<Void> createCategory(@RequestBody @Valid CreateCategoryRequest req) {
 		categoryService.createCategory(req);
 
 		return ApiResponse.of(HttpStatus.CREATED, null);

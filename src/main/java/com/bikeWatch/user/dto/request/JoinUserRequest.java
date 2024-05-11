@@ -11,7 +11,6 @@ public record JoinUserRequest(
 		return User.builder()
 			.email(email)
 			.password(bCryptEncodedPassword)
-			.role(Role.ROLE_USER)
 			.build();
 	}
 }

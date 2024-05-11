@@ -34,13 +34,12 @@ public class User implements UserDetails {
 	private String password;
 
 	@Enumerated(value = EnumType.STRING)
-	private Role role = Role.ROLE_USER;
+	private final Role role = Role.USER;
 
 	@Builder
-	public User(String email, String password, Role role) {
+	public User(String email, String password) {
 		this.email = email;
 		this.password = password;
-		this.role = role;
 	}
 
 	// 권한 반환 // getRole()과 같은 역할
