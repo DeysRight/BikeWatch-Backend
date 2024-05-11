@@ -29,7 +29,7 @@ public class UserController {
 
 	private final UserService userService;
 
-	@Operation(summary = "회원가입", description = "회원를 생성합니다.")
+	@Operation(summary = "회원가입", description = "회원을 생성합니다.")
 	@PostMapping("/join")
 	public JoinUserResponse join(@RequestBody JoinUserRequest req) {
 		return userService.save(req);
