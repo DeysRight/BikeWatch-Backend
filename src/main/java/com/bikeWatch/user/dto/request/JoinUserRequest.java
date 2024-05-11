@@ -5,14 +5,13 @@ import com.bikeWatch.user.domain.User;
 
 public record JoinUserRequest(
 	String email,
-	String password,
-	Role role
+	String password
 ) {
 	public User toEntity(String bCryptEncodedPassword) {
 		return User.builder()
 			.email(email)
 			.password(bCryptEncodedPassword)
-			.role(role)
+			.role(Role.ROLE_USER)
 			.build();
 	}
 }
