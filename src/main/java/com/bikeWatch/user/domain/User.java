@@ -34,7 +34,7 @@ public class User implements UserDetails {
 	private String password;
 
 	@Enumerated(value = EnumType.STRING)
-	private final Role role = Role.USER;
+	private final Role role = Role.ROLE_USER;
 
 	@Builder
 	public User(String email, String password) {

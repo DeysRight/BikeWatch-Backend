@@ -21,6 +21,7 @@ import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 
 @Service
+
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class BoardService {

@@ -1,6 +1,5 @@
 package com.bikeWatch.user.dto.request;
 
-import com.bikeWatch.user.domain.Role;
 import com.bikeWatch.user.domain.User;
 
 public record JoinUserRequest(
