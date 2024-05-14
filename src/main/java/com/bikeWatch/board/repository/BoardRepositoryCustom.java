@@ -10,4 +10,6 @@ public interface BoardRepositoryCustom {
 	Page<FindBoardResponse> getListByKeyword(Pageable pageable, String keyword);
 
 	Page<FindBoardResponse> getListByMenu(Pageable pageable, Long menuId);
+
+	Page<FindBoardResponse> getBoardListByMenuAndKeyword(Pageable pageable, Long menuId, String keyword);
 }

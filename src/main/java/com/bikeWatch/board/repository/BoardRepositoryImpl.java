@@ -66,6 +66,28 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
 		return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchOne);
 	}
 
+	@Override
+	public Page<FindBoardResponse> getBoardListByMenuAndKeyword(Pageable pageable, Long menuId, String keyword) {
+		List<FindBoardResponse> content = jpaQueryFactory
+			.select(new QFindBoardResponse(
+				board.id,
+				board.title,
+				board.content))
+			.from(board)
+			.where(board.menu.id.eq(menuId)
+				.and(titleOrContentContainsByKeyword(keyword)))
+			.offset(pageable.getOffset())
+			.limit(pageable.getPageSize())
+			.fetch();
+
+		JPAQuery<Long> countQuery = jpaQueryFactory
+			.select(board.count())
+			.from(board)
+			.where(board.menu.id.eq(menuId));
+
+		return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchOne);
+	}
+
 	private BooleanExpression titleOrContentContainsByKeyword(String keyword) {
 		return StringUtils.isEmpty(keyword) ? null :
 			board.title.contains(keyword).or(board.content.contains(keyword));

@@ -71,4 +71,14 @@ public class BoardService {
 	public void deleteBoard(Long boardId) {
 		boardRepository.deleteById(boardId);
 	}
+
+	public Page<FindBoardResponse> getBoardListByMenuAndKeyword(Pageable pageable, Long menuId, String keyword) {
+		Page<FindBoardResponse> findBoardResponses = boardRepository.getBoardListByMenuAndKeyword(pageable,
+			menuId, keyword);
+
+		if (findBoardResponses.isEmpty()) {
+			throw new BadRequestException(ErrorCode.NOT_FOUND_BOARD);
+		}
+		return findBoardResponses;
+	}
 }

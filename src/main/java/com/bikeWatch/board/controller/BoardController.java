@@ -55,17 +55,24 @@ public class BoardController {
 		return ApiResponse.of(HttpStatus.NO_CONTENT, null);
 	}
 
-	@Operation(summary = "게시판 조회 API by.키워드", description = "제목 또는 내용에 키워드를 포함하는 게시판을 조회합니다.")
-	@GetMapping
-	public ApiResponse<Page<FindBoardResponse>> getBoardListByKeyword(Pageable pageable,
-		@RequestParam(name = "keyword", required = false) String keyword) {
-		return ApiResponse.ok(boardService.getListByKeyword(pageable, keyword));
-	}
+	// @Operation(summary = "게시판 조회 API by.키워드", description = "제목 또는 내용에 키워드를 포함하는 게시판을 조회합니다.")
+	// @GetMapping
+	// public ApiResponse<Page<FindBoardResponse>> getBoardListByKeyword(Pageable pageable,
+	// 	@RequestParam(name = "keyword", required = false) String keyword) {
+	// 	return ApiResponse.ok(boardService.getListByKeyword(pageable, keyword));
+	// }
+	//
+	// @Operation(summary = "게시판 조회 API by.메뉴", description = "선택한 메뉴의 게시판을 조회합니다.")
+	// @GetMapping("/{menuId}")
+	// public ApiResponse<Page<FindBoardResponse>> getBoardListByMenu(Pageable pageable,
+	// 	@PathVariable(name = "menuId") Long menuId) {
+	// 	return ApiResponse.ok(boardService.getListByMenu(pageable, menuId));
+	// }
 
-	@Operation(summary = "게시판 조회 API by.메뉴", description = "선택한 메뉴의 게시판을 조회합니다.")
+	@Operation(summary = "게시판 조회 API by.메뉴 AND 키워드", description = "해당 메뉴에서 제목 또는 내용에 키워드를 포함하는 게시판 글을 조회합니다.")
 	@GetMapping("/{menuId}")
-	public ApiResponse<Page<FindBoardResponse>> getBoardListByMenu(Pageable pageable,
-		@PathVariable(name = "menuId") Long menuId) {
-		return ApiResponse.ok(boardService.getListByMenu(pageable, menuId));
+	public ApiResponse<Page<FindBoardResponse>> getBoardListByMenuAndKeyword(Pageable pageable,
+		@PathVariable(name = "menuId") Long menuId, @RequestParam(name = "keyword", required = false) String keyword) {
+		return ApiResponse.ok(boardService.getBoardListByMenuAndKeyword(pageable, menuId, keyword));
 	}
 }
