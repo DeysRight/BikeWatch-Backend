@@ -1,8 +1,7 @@
 package com.bikeWatch.review.controller;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,7 +39,6 @@ public class ReviewController {
 
 		return ApiResponse.of(HttpStatus.CREATED, null);
 	}
-
 
 	@Operation(summary = "리뷰 키워드 조회", description = "리뷰를 키워드로 조회합니다.")
 	@GetMapping

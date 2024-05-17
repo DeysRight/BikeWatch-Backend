@@ -16,5 +16,11 @@ spring:
     init:
       mode: always
 
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
+
 logging.level:
   org.hibernate.type: trace
+
