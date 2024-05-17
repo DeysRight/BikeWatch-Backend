@@ -13,8 +13,8 @@ public enum ErrorCode {
 	// User
 	NOT_FOUND_USER(HttpStatus.NOT_FOUND, "해당 계정이 존재하지 않습니다."),
 
-	// Board
-	NOT_FOUND_BOARD(HttpStatus.NOT_FOUND, "게시글이 존재하지 않습니다."),
+	// Review
+	NOT_FOUND_REVIEW(HttpStatus.NOT_FOUND, "존재하지 않는 리뷰입니다."),
 
 	// Category
 	NOT_FOUND_CATEGORY(HttpStatus.NOT_FOUND, "해당 카테고리가 존재하지 않습니다."),

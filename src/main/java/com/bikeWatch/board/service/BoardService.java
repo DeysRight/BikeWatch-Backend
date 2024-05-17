@@ -42,7 +42,7 @@ public class BoardService {
 	@Transactional
 	public UpdateBoardResponse updateBoard(UpdateBoardRequest req, Long boardId) {
 		Board board = boardRepository.findById(boardId)
-			.orElseThrow(() -> new BadRequestException(ErrorCode.NOT_FOUND_BOARD));
+			.orElseThrow(() -> new BadRequestException(ErrorCode.NOT_FOUND_REVIEW));
 		Board updatedBoard = board.updateTitleAndContent(req.title(), req.content());
 
 		entityManager.flush();
@@ -54,7 +54,7 @@ public class BoardService {
 		Page<FindBoardResponse> listByKeyword = boardRepository.getListByKeyword(pageable, keyword);
 
 		if (listByKeyword.isEmpty()) {
-			throw new BadRequestException(ErrorCode.NOT_FOUND_BOARD);
+			throw new BadRequestException(ErrorCode.NOT_FOUND_REVIEW);
 		}
 		return listByKeyword;
 	}
@@ -63,7 +63,7 @@ public class BoardService {
 		Page<FindBoardResponse> listByMenu = boardRepository.getListByMenu(pageable, menuId);
 
 		if (listByMenu.isEmpty()) {
-			throw new BadRequestException(ErrorCode.NOT_FOUND_BOARD);
+			throw new BadRequestException(ErrorCode.NOT_FOUND_REVIEW);
 		}
 		return listByMenu;
 	}
@@ -77,7 +77,7 @@ public class BoardService {
 			menuId, keyword);
 
 		if (findBoardResponses.isEmpty()) {
-			throw new BadRequestException(ErrorCode.NOT_FOUND_BOARD);
+			throw new BadRequestException(ErrorCode.NOT_FOUND_REVIEW);
 		}
 		return findBoardResponses;
 	}

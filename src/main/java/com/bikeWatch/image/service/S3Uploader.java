@@ -37,6 +37,7 @@ public class S3Uploader {
 	public CreateImageResponse upload(File uploadFile, String dirName) {
 		String fileName = dirName + "/" + uploadFile.getName(); // S3에 저장된 파일 이름
 		String uploadImageUrl = putS3(uploadFile, fileName); // S3로 업로드
+
 		log.info("uploadImageUrl = " + uploadImageUrl);
 
 		removeNewFile(uploadFile);
