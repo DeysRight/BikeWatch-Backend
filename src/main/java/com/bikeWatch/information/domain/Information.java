@@ -26,4 +26,8 @@ public class Information {
 
 	@Column(length = 13)
 	private String phoneNumber;
+
+	private String instagramId;
+
+	private String businessNumber;
 }

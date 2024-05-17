@@ -1,7 +1,5 @@
 package com.bikeWatch.information.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,11 +18,9 @@ public class InformationService {
 	private final InformationRepository informationRepository;
 
 	public Information findAll() {
-		List<Information> informations = informationRepository.findAll();
-
-		if (informations.isEmpty()) {
-			throw new InternalServerException(ErrorCode.INTERNAL_SERVER_ERROR);
-		}
-		return informations.get(0);
+		return informationRepository.findAll()
+			.stream()
+			.findFirst()
+			.orElseThrow(() -> new InternalServerException(ErrorCode.INTERNAL_SERVER_ERROR));
 	}
 }
