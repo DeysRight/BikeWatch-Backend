@@ -80,6 +80,7 @@ public class UserService {
 	}
 
 	private void setHeader(HttpServletResponse response, TokenDto tokenDto) {
+		response.addHeader("Authorization", tokenDto.accessToken());
 		response.addHeader(JwtTokenProvider.ACCESS_TOKEN, tokenDto.accessToken());
 		response.addHeader(JwtTokenProvider.REFRESH_TOKEN, tokenDto.refreshToken());
 	}
