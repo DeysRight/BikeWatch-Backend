@@ -3,6 +3,7 @@ package com.bikeWatch.user.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bikeWatch.common.domain.ApiResponse;
 import com.bikeWatch.user.dto.request.JoinUserRequest;
 import com.bikeWatch.user.dto.request.LoginUserRequest;
 import com.bikeWatch.user.dto.response.JoinUserResponse;
+import com.bikeWatch.user.dto.response.LoginUserResponse;
 import com.bikeWatch.user.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,7 +39,7 @@ public class UserController {
 	}
 
 	@GetMapping("/status")
-	public Map status() {
+	public Map<String, Object> status() {
 		Map<String, Object> map = new HashMap<>();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userName = authentication.getName();
@@ -51,7 +54,7 @@ public class UserController {
 
 	@Operation(summary = "로그인", description = "로그인을 합니다.")
 	@PostMapping("/login")
-	public void login(@RequestBody LoginUserRequest req, HttpServletResponse response) {
-		userService.login(req, response);
+	public ApiResponse<LoginUserResponse> login(@RequestBody LoginUserRequest req, HttpServletResponse response) {
+		return ApiResponse.of(HttpStatus.CREATED, userService.login(req, response));
 	}
 }

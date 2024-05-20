@@ -19,6 +19,7 @@ import com.bikeWatch.user.domain.User;
 import com.bikeWatch.user.dto.request.JoinUserRequest;
 import com.bikeWatch.user.dto.request.LoginUserRequest;
 import com.bikeWatch.user.dto.response.JoinUserResponse;
+import com.bikeWatch.user.dto.response.LoginUserResponse;
 import com.bikeWatch.user.repository.UserRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -45,7 +46,7 @@ public class UserService {
 	}
 
 	@Transactional
-	public void login(LoginUserRequest req, HttpServletResponse response) {
+	public LoginUserResponse login(LoginUserRequest req, HttpServletResponse response) {
 
 		User user = userRepository.findByEmail(req.email())
 			.orElseThrow(() -> new BadRequestException(ErrorCode.NOT_FOUND_USER));
@@ -71,7 +72,10 @@ public class UserService {
 				);
 
 			// response 헤더에 Access Token / Refresh Token 넣음
+
 			setHeader(response, tokenDto);
+
+			return new LoginUserResponse(tokenDto.accessToken(), tokenDto.refreshToken());
 		} catch (Exception e) {
 			log.error("검증 실패");
 

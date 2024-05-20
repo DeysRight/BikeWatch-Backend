@@ -1,7 +1,5 @@
 package com.bikeWatch.common.config.security;
 
-import java.util.Collections;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -75,7 +73,7 @@ public class WebSecurityConfig {
 		configuration.addAllowedHeader("*"); // 모든 헤더에 응답을 허용
 		configuration.addAllowedMethod("*"); // 모든 post, get, put, delete, patch 요청을 허용
 		configuration.setAllowCredentials(true); // 내 서버의 json 응답을 자바스크립트가 처리할 수 있게 설정
-		configuration.addExposedHeader("Authorization"); // 프론트에서  헤더 Authorization 키값으로 접근가능하도록 설정
+		configuration.addExposedHeader("Authorization"); // 프론트에서 헤더 Authorization 키값으로 접근 가능하도록 설정
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
 
