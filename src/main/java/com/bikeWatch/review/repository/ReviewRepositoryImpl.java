@@ -31,7 +31,8 @@ public class ReviewRepositoryImpl implements ReviewRepositoryCustom {
 				review.id,
 				review.title,
 				review.imagePath,
-				review.content
+				review.content,
+				review.createdDateTime
 			))
 			.from(review)
 			.where(titleOrContentContainsByKeyword(keyword))
