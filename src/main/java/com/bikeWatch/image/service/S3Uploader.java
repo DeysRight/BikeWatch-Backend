@@ -12,6 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.bikeWatch.common.error.ErrorCode;
+import com.bikeWatch.common.error.exception.BadRequestException;
+import com.bikeWatch.common.error.exception.InternalServerException;
 import com.bikeWatch.image.dto.response.CreateImageResponse;
 
 import lombok.RequiredArgsConstructor;
@@ -29,7 +32,7 @@ public class S3Uploader {
 
 	public CreateImageResponse create(MultipartFile file, String dirName) throws IOException {
 		File uploadFile = convert(file)
-			.orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다."));
+			.orElseThrow(() -> new InternalServerException(ErrorCode.FAIL_FILE_TRANSITION));
 
 		return upload(uploadFile, dirName);
 	}

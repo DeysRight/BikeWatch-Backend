@@ -21,6 +21,9 @@ public enum ErrorCode {
 	DUPLICATION_CATEGORY(HttpStatus.BAD_REQUEST, "카테고리명이 존재합니다."),
 	NOT_REMOVE_CATEGORY(HttpStatus.BAD_REQUEST, "지울 수 없는 카테고리입니다."),
 
+	// Image
+	FAIL_FILE_TRANSITION(HttpStatus.INTERNAL_SERVER_ERROR, "MultipartFile -> File로 전환이 실패했습니다."),
+
 	// Menu
 	NOT_FOUND_MENU(HttpStatus.NOT_FOUND, "해당 메뉴가 존재하지 않습니다."),
 	DUPLICATION_MENU(HttpStatus.BAD_REQUEST, "메뉴명이 존재합니다."),
