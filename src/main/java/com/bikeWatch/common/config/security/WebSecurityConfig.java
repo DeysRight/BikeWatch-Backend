@@ -54,7 +54,7 @@ public class WebSecurityConfig {
 				.anyRequest().authenticated()
 			)
 			.csrf(AbstractHttpConfigurer::disable) // 백 작업시 필요없고 403 포비든 에러, 프론트(ssr일 경우인 듯)가 붙으면 csrf() 켜줘야한다.
-			// .cors(config -> config.configurationSource(corsConfigurationSource))
+			.cors(config -> config.configurationSource(corsConfigurationSource))
 			.httpBasic(AbstractHttpConfigurer::disable) // login form redirect 필요 X (rest api)
 			.formLogin(AbstractHttpConfigurer::disable) // 너가 만들어주는 폼 로그인 안쓰고싶어
 			.rememberMe(AbstractHttpConfigurer::disable)

@@ -33,7 +33,7 @@ public class ApiResponse<T> {
 		return of(HttpStatus.OK, data);
 	}
 
-	public static ApiResponse error(ErrorCode errorCode) {
-		return new ApiResponse(errorCode.getHttpStatus(), errorCode.getMessage(), null);
+	public static <T> ApiResponse<T> error(ErrorCode errorCode) {
+		return new ApiResponse<>(errorCode.getHttpStatus(), errorCode.getMessage(), null);
 	}
 }

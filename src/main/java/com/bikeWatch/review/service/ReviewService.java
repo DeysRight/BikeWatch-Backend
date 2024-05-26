@@ -1,14 +1,10 @@
 package com.bikeWatch.review.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bikeWatch.board.dto.response.FindBoardResponse;
 import com.bikeWatch.common.error.ErrorCode;
 import com.bikeWatch.common.error.exception.BadRequestException;
 import com.bikeWatch.review.domain.Review;
