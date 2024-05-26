@@ -3,6 +3,7 @@ package com.bikeWatch.image.controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,7 +26,7 @@ public class ImageController {
 
 	@Operation(summary = "이미지 업로드", description = "S3 버킷에 이미지를 업로드하고 경로를 리턴 받습니다.")
 	@PostMapping
-	public ApiResponse<CreateImageResponse> createImage(@RequestParam(value = "file") MultipartFile file) {
+	public ApiResponse<CreateImageResponse> createImage(@RequestPart(value = "file") MultipartFile file) {
 		try {
 			return ApiResponse.ok(s3Uploader.create(file, "static"));
 		} catch (Exception e) {
