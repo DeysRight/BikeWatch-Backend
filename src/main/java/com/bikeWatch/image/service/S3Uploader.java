@@ -3,6 +3,9 @@ package com.bikeWatch.image.service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +16,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.bikeWatch.common.error.ErrorCode;
+import com.bikeWatch.common.error.exception.BadRequestException;
 import com.bikeWatch.common.error.exception.InternalServerException;
 import com.bikeWatch.image.dto.response.CreateImageResponse;
 
@@ -37,7 +41,8 @@ public class S3Uploader {
 	}
 
 	public CreateImageResponse upload(File uploadFile, String dirName) {
-		String fileName = dirName + "/" + uploadFile.getName(); // S3에 저장된 파일 이름
+		String extension = extractExtension(uploadFile.getName());
+		String fileName = dirName + "/" + organizeSavedFileName(extension); // S3에 저장된 파일 이름
 		String uploadImageUrl = putS3(uploadFile, fileName); // S3로 업로드
 
 		log.info("uploadImageUrl = " + uploadImageUrl);
@@ -45,6 +50,29 @@ public class S3Uploader {
 		removeNewFile(uploadFile);
 
 		return new CreateImageResponse(uploadImageUrl);
+	}
+
+	public String extractExtension(String originFileName) {
+		int fileExtensionIndex = originFileName.lastIndexOf('.');
+		String fileExtension = originFileName.substring(fileExtensionIndex + 1);
+
+		if (validateExtension(fileExtension)) {
+			return fileExtension;
+		}
+		throw new BadRequestException(ErrorCode.NOT_SUPPORTED_EXTENSION);
+	}
+
+	public String organizeSavedFileName(String extension) {
+		LocalDateTime now = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+
+		return now.format(formatter) + "." + extension;
+	}
+
+	public boolean validateExtension(String fileExtension) {
+		String[] extension = {"jpg", "jpeg", "bmp", "gif", "png"};
+
+		return Arrays.asList(extension).contains(fileExtension);
 	}
 
 	// 1. 로컬에 파일 생성

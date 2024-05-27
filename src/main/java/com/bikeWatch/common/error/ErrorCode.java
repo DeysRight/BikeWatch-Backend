@@ -23,6 +23,7 @@ public enum ErrorCode {
 
 	// Image
 	FAIL_FILE_TRANSITION(HttpStatus.INTERNAL_SERVER_ERROR, "MultipartFile -> File로 전환이 실패했습니다."),
+	NOT_SUPPORTED_EXTENSION(HttpStatus.NOT_FOUND, "지원되지 않는 확장자입니다."),
 
 	// Menu
 	NOT_FOUND_MENU(HttpStatus.NOT_FOUND, "해당 메뉴가 존재하지 않습니다."),
