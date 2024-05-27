@@ -15,12 +15,12 @@ FROM openjdk:17-jdk-slim as runtime
 LABEL maintainer="Kyungtak Park <qkrrudxkr77@gmail.com>"
 
 RUN addgroup --system --gid 1000 worker && adduser --system --uid 1000 --ingroup worker --disabled-password worker
-USER worker:worker
 
 COPY --from=builder build/libs/*.jar app.jar
 
 # 파일 소유권 변경
 RUN chown -f worker:worker /app.jar
+USER worker:worker
 
 ENV PROFILE ${PROFILE}
 EXPOSE 8080
