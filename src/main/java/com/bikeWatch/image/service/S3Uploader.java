@@ -13,7 +13,6 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.bikeWatch.common.error.ErrorCode;
-import com.bikeWatch.common.error.exception.BadRequestException;
 import com.bikeWatch.common.error.exception.InternalServerException;
 import com.bikeWatch.image.dto.response.CreateImageResponse;
 
@@ -50,7 +49,8 @@ public class S3Uploader {
 
 	// 1. 로컬에 파일 생성
 	private Optional<File> convert(MultipartFile file) throws IOException {
-		File convertFile = new File(System.getProperty("user.dir") + "/" + file.getOriginalFilename());
+		// File convertFile = new File(System.getProperty("user.dir") + "/" + file.getOriginalFilename());
+		File convertFile = new File("/home/worker/" + file.getOriginalFilename());
 
 		if (convertFile.createNewFile()) {
 			try (FileOutputStream fos = new FileOutputStream(convertFile)) {

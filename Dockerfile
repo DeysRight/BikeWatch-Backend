@@ -19,6 +19,9 @@ USER worker:worker
 
 COPY --from=builder build/libs/*.jar app.jar
 
+# 파일 소유권 변경
+RUN chown -f worker:worker /app.jar
+
 ENV PROFILE ${PROFILE}
 EXPOSE 8080
 ENTRYPOINT ["java", "-Dspring.profiles.active=${PROFILE}", "-jar", "/app.jar"]
