@@ -34,3 +34,6 @@ jwt:
   secretKey: test
   accessTokenValidTime: 36000000
   refreshTokenValidTime: 36000000
+
+logging:
+  level: info
