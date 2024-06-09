@@ -12,7 +12,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(visitorStatisticsInterceptor())
 			.order(1)
-			.addPathPatterns("/**")
+			.addPathPatterns("/")
 			.excludePathPatterns("/css/**", "/*.ico", "/error");
 	}
 
