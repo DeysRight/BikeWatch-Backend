@@ -18,11 +18,11 @@ public class Information {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private int seoulPrice;
+	private String seoulPrice;
 
-	private int gyeonggiPrice;
+	private String gyeonggiPrice;
 
-	private int etcPrice;
+	private String etcPrice;
 
 	@Column(length = 13)
 	private String phoneNumber;
