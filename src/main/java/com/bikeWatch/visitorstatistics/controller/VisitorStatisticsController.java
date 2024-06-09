@@ -25,7 +25,6 @@ public class VisitorStatisticsController {
 	@Operation(summary = "오늘 방문자, 전체 방문자 카운트 조회", description = "페이지에 접속한 오늘 방문자와 전체 방문자의 카운트를 조회합니다.")
 	@GetMapping
 	public ApiResponse<VisitorCountResponse> todayVisitorCount() {
-		ApiResponse<VisitorCountResponse> ok = ApiResponse.ok(visitorStatisticsService.visitorCount(LocalDate.now()));
-		return ok;
+		return ApiResponse.ok(visitorStatisticsService.visitorCount(LocalDate.now()));
 	}
 }
