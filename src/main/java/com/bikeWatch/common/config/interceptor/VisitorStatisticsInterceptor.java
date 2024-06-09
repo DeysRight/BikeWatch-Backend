@@ -19,10 +19,6 @@ public class VisitorStatisticsInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		String requestURI = request.getRequestURI();
-		if (!"/".equals(requestURI)) {
-			return false;
-		}
 		String ipAddress = request.getHeader("X-Forwarded-For");
 
 		if (ipAddress == null || ipAddress.isEmpty() || "unknown".equalsIgnoreCase(ipAddress)) {
@@ -52,8 +48,11 @@ public class VisitorStatisticsInterceptor implements HandlerInterceptor {
 		if (ipAddress == null || ipAddress.isEmpty() || "unknown".equalsIgnoreCase(ipAddress)) {
 			ipAddress = request.getRemoteAddr();
 		}
-		visitorStatisticsService.save(ipAddress, LocalDateTime.now());
+		String requestURI = request.getRequestURI();
 
+		if ("/".equals(requestURI)) {
+			visitorStatisticsService.save(ipAddress, LocalDateTime.now());
+		}
 		return true;
 	}
 }
