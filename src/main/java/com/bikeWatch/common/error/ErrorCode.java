@@ -16,6 +16,12 @@ public enum ErrorCode {
 	// Review
 	NOT_FOUND_REVIEW(HttpStatus.NOT_FOUND, "존재하지 않는 리뷰입니다."),
 
+	// UsedBike
+	NOT_FOUND_USED_BIKE(HttpStatus.NOT_FOUND, "존재하지 않는 중고 바이크입니다."),
+
+	// UsedPart
+	NOT_FOUND_USED_PART(HttpStatus.NOT_FOUND, "존재하지 않는 부품입니다."),
+
 	// Category
 	NOT_FOUND_CATEGORY(HttpStatus.NOT_FOUND, "해당 카테고리가 존재하지 않습니다."),
 	DUPLICATION_CATEGORY(HttpStatus.BAD_REQUEST, "카테고리명이 존재합니다."),
