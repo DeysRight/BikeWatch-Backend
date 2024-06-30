@@ -45,8 +45,8 @@ jobs:
                   secret: SECRET_KEY
                 - name: BUCKET
                   secret: BUCKET
-                - name: AP-NORTHEAST-2
-                  secret: AP-NORTHEAST-2
+                - name: AP_NORTHEAST_2
+                  secret: AP_NORTHEAST_2
             context:
               git:
                 url: git@github.com:${{ github.repository }}.git
