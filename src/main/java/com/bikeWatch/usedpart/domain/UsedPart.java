@@ -2,6 +2,7 @@ package com.bikeWatch.usedpart.domain;
 
 import com.bikeWatch.common.domain.BaseTimeEntity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +27,7 @@ public class UsedPart extends BaseTimeEntity {
 	private String imagePath;
 
 	@Lob
+	@Column(columnDefinition = "TEXT")
 	private String content;
 
 	@Builder
