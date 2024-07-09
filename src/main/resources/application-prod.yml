@@ -8,6 +8,12 @@ spring:
     hibernate:
       ddl-auto: none
 
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
+
 logging.level:
   org.hibernate.SQL: info
 
@@ -22,12 +28,6 @@ cloud:
       static: ${AP-NORTHEAST-2}
     stack:
       auto: false
-
-servlet:
-  multipart:
-    enabled: true
-    max-file-size: 20MB
-    max-request-size: 20MB
 
 jwt:
   issuer: test
