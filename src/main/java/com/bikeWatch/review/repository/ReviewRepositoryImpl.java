@@ -38,6 +38,7 @@ public class ReviewRepositoryImpl implements ReviewRepositoryCustom {
 			.where(titleOrContentContainsByKeyword(keyword))
 			.offset(pageable.getOffset())
 			.limit(pageable.getPageSize())
+			.orderBy(review.id.desc())
 			.fetch();
 
 		JPAQuery<Long> countQuery = jpaQueryFactory
